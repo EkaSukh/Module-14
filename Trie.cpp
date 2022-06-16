@@ -195,7 +195,6 @@ TrieNode* getStart(TrieNode* root, const std::string key)
 {
 	//если нет такого префикса
 	if (!search(root, key)) {
-		std::cerr << "didn't see the prefix.\n";
 		return nullptr;
 	}
 
@@ -249,7 +248,6 @@ bool constructVariants(TrieNode* root, const std::string key, std::vector<std::s
 	TrieNode* start = getStart(root, key);
 	//нет такого префикса и нет возможности сформировать массив вариантов
 	if (!start) {
-		std::cerr << "can not construct words variants and return false.\n";
 		return false;
 	}
 
