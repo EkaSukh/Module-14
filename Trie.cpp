@@ -18,7 +18,7 @@ TrieNode* getNewNode(void)
 }
 
 //вставка слова в дерево
-void insertInTrie(TrieNode* root, string key)
+void insertInTrie(TrieNode* root, std::string key)
 {
 	//временный объект для перемещения по дереву
 	TrieNode* nNode = root;
@@ -40,7 +40,7 @@ void insertInTrie(TrieNode* root, string key)
 }
 
 //поиск слова в дереве
-bool searcWord(TrieNode* root, string key)
+bool searcWord(TrieNode* root, std::string key)
 {
 	//временный объект для перемещения по дереву
 	TrieNode* node = root;
@@ -63,7 +63,7 @@ bool searcWord(TrieNode* root, string key)
 }
 
 //поиск префикса
-bool search(TrieNode* root, string key)
+bool search(TrieNode* root, std::string key)
 {
 	//временный объект для перемещения по дереву
 	TrieNode* node = root;
@@ -95,7 +95,7 @@ bool isEmpty(TrieNode* root)
 }
 
 //удаление слова из дерева
-TrieNode* remove(TrieNode* root, string key, int depth = 0)
+TrieNode* remove(TrieNode* root, std::string key, int depth = 0)
 {
 	// Если дерево пустое
 	if (!root)
@@ -152,7 +152,7 @@ int friquency(TrieNode* node)
 
 
 //поиск минимального префикса слова
-void findMinPrefixes(TrieNode* root, char buf[], int ind, string& res)
+void findMinPrefixes(TrieNode* root, char buf[], int ind, std::string& res)
 {
 	//если узел нулевой
 	if (root == nullptr)
@@ -191,11 +191,11 @@ void findMinPrefixes(TrieNode* root, char buf[], int ind, string& res)
 }
 
 //возвращает указатель на узел последнего символа введенного префикса
-TrieNode* getStart(TrieNode* root, const string key)
+TrieNode* getStart(TrieNode* root, const std::string key)
 {
 	//если нет такого префикса
 	if (!search(root, key)) {
-		cerr << "didn't see the prefix.\n";
+		std::cerr << "didn't see the prefix.\n";
 		return nullptr;
 	}
 
@@ -213,7 +213,7 @@ TrieNode* getStart(TrieNode* root, const string key)
 
 
 //заполняет вектор вариантов оканчиний префикса
-void findEndsOfWords(TrieNode* start, char buf[], int ind, const string& key, vector<string>& storage)
+void findEndsOfWords(TrieNode* start, char buf[], int ind, const std::string& key, std::vector<std::string>& storage)
 {
 	//случай пустого узла
 	if (start == nullptr)
@@ -222,7 +222,7 @@ void findEndsOfWords(TrieNode* start, char buf[], int ind, const string& key, ve
 	//случай конца слова
 	if (start->isEndOfWord)
 	{
-		string str = key;
+		std::string str = key;
 
 		buf[ind] = '\0';
 		str += buf;
@@ -243,13 +243,13 @@ void findEndsOfWords(TrieNode* start, char buf[], int ind, const string& key, ve
 //конструирует вектор вариантов полных слов от введенного префикса
 //возвращает успешность работы
 
-bool constructVariants(TrieNode* root, const string key, vector<string>& variants)
+bool constructVariants(TrieNode* root, const std::string key, std::vector<std::string>& variants)
 {
 	//получаем узел начала поиска окончаний слов для данного префикса
 	TrieNode* start = getStart(root, key);
 	//нет такого префикса и нет возможности сформировать массив вариантов
 	if (!start) {
-		cerr << "can not construct words variants and return false.\n";
+		std::cerr << "can not construct words variants and return false.\n";
 		return false;
 	}
 
@@ -264,12 +264,12 @@ bool constructVariants(TrieNode* root, const string key, vector<string>& variant
 }
 
 //распечатывает вектор вариантов
-void printVariants(const vector<string>& variants)
+void printVariants(const std::vector<std::string>& variants)
 {
 	int index = 1;
 	for (auto i = variants.begin(); i != variants.end(); ++i)
 	{
-		cout << index << " " << *i << endl;
+		std::cout << index << " " << *i << std::endl;
 		++index;
 	}
 }
@@ -277,12 +277,12 @@ void printVariants(const vector<string>& variants)
 
 //конечная функция позволяет увидеть возможные варианты слов с данным префиксом
 //возвращает выбранное слово (и может быть использована для формирования потока вывода)
-string GenerateWord(TrieNode* root, const string key)
+std::string GenerateWord(TrieNode* root, const std::string key)
 {
 	//массив возможных вариантов окончаний
-	vector<string> variants;
+	std::vector<std::string> variants;
 	//конечная строка, которую вернет функция
-	string result;
+	std::string result;
 
 	//пытаемся сконструировать массив вариантов окончания префикса
 	bool successToConstruct = constructVariants(root, key, variants);
@@ -290,7 +290,7 @@ string GenerateWord(TrieNode* root, const string key)
 	//если не получилось
 	if (!successToConstruct)
 	{
-		cout << "Unable to construct variants on the prefix.\n";
+		std::cout << "Unable to construct variants on the prefix.\n";
 		//возвращаем пустую строку
 		return result;
 	}
@@ -299,7 +299,7 @@ string GenerateWord(TrieNode* root, const string key)
 	printVariants(variants);
 
 	//жаем пользователю возможность выбора слова
-	cout << "Enter a number of a variant: ";
+	std::cout << "Enter a number of a variant: ";
 	int index;
 
 	//контроль ввода пользователя по типу
@@ -313,7 +313,7 @@ string GenerateWord(TrieNode* root, const string key)
 	//контроль ввода пользователя по диапазону введенного значения
 	if (index > variants.size() || index <= 0)
 	{
-		cout << "The number is out of variant's range.\n";
+		std::cout << "The number is out of variant's range.\n";
 		return result;
 	}
 
@@ -321,4 +321,47 @@ string GenerateWord(TrieNode* root, const string key)
 	result = variants[index - 1];
 
 	return result;
+}
+
+//поддерживает пользовательский ввод и контролируемый выход из функции
+void autocomleteInterface(TrieNode* root)
+{
+	//переменная состояния
+	bool enable = true;
+	std::cout << "To quite the autocomplete function enter \'_\' \n" <<
+		"\'#\' to print the final line\n" <<
+		"\'0\' to clear the final line\n" <<
+		"to continue enter a prefix for search:\n";
+
+	//пользовательский ввод
+	std::string input;
+	std::cin >> input;
+
+	std::string resulting;
+
+	while (enable)
+	{
+		
+		if (input == "_")
+		{
+			enable = false;
+			continue;
+		}
+
+		if (input == "#")
+			std::cout << resulting << std::endl;
+
+		else if (input == "0")
+			resulting.clear();
+		else
+		{
+			std::string output = GenerateWord(root, input);
+			std::cout << output << std::endl;
+			resulting += output;
+			resulting += " ";
+		}
+		std::cin >> input;		
+	}
+
+	std::cout << "Exit outocompete." << std::endl;
 }
