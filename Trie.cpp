@@ -339,20 +339,22 @@ void autocomleteInterface(TrieNode* root)
 
 	std::string resulting;
 
+	//рабочий цикл функции
 	while (enable)
 	{
-		
+		//выход пользователя
 		if (input == "_")
 		{
 			enable = false;
 			continue;
 		}
-
+		//печать финальной строки
 		if (input == "#")
 			std::cout << resulting << std::endl;
-
+		//очистка финальной строки
 		else if (input == "0")
 			resulting.clear();
+		//добавление слова в финальную строку
 		else
 		{
 			std::string output = GenerateWord(root, input);
