@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-using namespace std;
+//using namespace std;
 
 #define ALPHABET_SIZE 26
 
@@ -17,43 +17,46 @@ struct TrieNode
 TrieNode* getNewNode(void);
 
 //вставка слова в дерево
-void insertInTrie(TrieNode* root, string key);
+void insertInTrie(TrieNode* root, std::string key);
 
 
 //поиск слова в дереве
-bool searcWord(TrieNode* root, string key);
+bool searcWord(TrieNode* root, std::string key);
 
 //поиск префикса
-bool search(TrieNode* root, string key);
+bool search(TrieNode* root, std::string key);
 
 
 //последний узел (не имеет потомков)
 bool isEmpty(TrieNode* root);
 
 //удаление слова из дерева
-TrieNode* remove(TrieNode* root, string key, int depth);
+TrieNode* remove(TrieNode* root, std::string key, int depth);
 
 //вычисление частоты участия ключа в различных словах дерева
 int friquency(TrieNode* node);
 
 //поиск минимального префикса слова
-void findMinPrefixes(TrieNode* root, char buf[], int ind, string& res);
+void findMinPrefixes(TrieNode* root, char buf[], int ind, std::string& res);
 
 //возвращает указатель на узел последнего символа введенного префикса
-TrieNode* getStart(TrieNode* root, const string key);
+TrieNode* getStart(TrieNode* root, const std::string key);
 
 //заполняет вектор вариантов оканчиний префикса
-void findEndsOfWords(TrieNode* start, char buf[], int ind, const string& key, vector<string>& storage);
+void findEndsOfWords(TrieNode* start, char buf[], int ind, const std::string& key, std::vector<std::string>& storage);
 
 
 //конструирует вектор вариантов полных слов от введенного префикса
 //возвращает успешность работы
-bool constructVariants(TrieNode* root, const string key, vector<string>& variants);
+bool constructVariants(TrieNode* root, const std::string key, std::vector<std::string>& variants);
 
 //распечатывает вектор вариантов
-void printVariants(const vector<string>& variants);
+void printVariants(const std::vector<std::string>& variants);
 
 
-//конечная функция позволяет увидеть возможные варианты слов с данным префиксом
+//позволяет увидеть возможные варианты слов с данным префиксом
 //возвращает выбранное слово (и может быть использована для формирования потока вывода)
-string GenerateWord(TrieNode* root, const string key);
+std::string GenerateWord(TrieNode* root, const std::string key);
+
+//поддерживает пользовательский ввод и контролируемый выход из функции
+void autocomleteInterface(TrieNode* root);
